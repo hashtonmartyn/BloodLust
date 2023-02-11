@@ -1,0 +1,28 @@
+<DataWarehouse>
+	<!--BloodLust/-->
+	<DataObject Name="BloodLust" Type="Mod" Id="15863850235867706158" Version="1">
+		<DataProperty Name="m_description" Type="Object">
+			<DataValue Name="util::ReflectLocString">10479004429148557785</DataValue>
+			<!--BloodLust/util::ReflectLocString/-->
+			<DataObject Name="" Type="util::ReflectLocString" Id="10479004429148557785" OwnerId="15863850235867706158">
+				<DataProperty Name="m_modPart2" Type="UInt32" Value="472868028"/>
+				<DataProperty Name="m_modPart3" Type="UInt32" Value="1028481998"/>
+				<DataProperty Name="m_modPart0" Type="UInt32" Value="1500264032"/>
+				<DataProperty Name="m_modPart1" Type="UInt32" Value="1336676342"/>
+				<DataProperty Name="m_locStringKey" Type="Int32" Value="2"/>
+			</DataObject>
+		</DataProperty>
+		<DataProperty Name="m_name" Type="Object">
+			<DataValue Name="util::ReflectLocString">2899747726046377785</DataValue>
+			<!--BloodLust/util::ReflectLocString/-->
+			<DataObject Name="" Type="util::ReflectLocString" Id="2899747726046377785" OwnerId="15863850235867706158">
+				<DataProperty Name="m_modPart2" Type="UInt32" Value="472868028"/>
+				<DataProperty Name="m_modPart3" Type="UInt32" Value="1028481998"/>
+				<DataProperty Name="m_modPart0" Type="UInt32" Value="1500264032"/>
+				<DataProperty Name="m_modPart1" Type="UInt32" Value="1336676342"/>
+				<DataProperty Name="m_locStringKey" Type="Int32" Value="1"/>
+			</DataObject>
+		</DataProperty>
+	</DataObject>
+</DataWarehouse>
+

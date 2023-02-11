@@ -1,0 +1,124 @@
+import("cardinal.scar")
+import("ScarUtil.scar")
+import("gamemodes/standard_mode.scar")
+import("modifiers.scar")
+
+
+-----------------------------------------------------------------------
+-- Data
+-----------------------------------------------------------------------
+
+-- Global data table that can be referenced in script functions (e.g. _mod.module = "Mod")
+_mod = {
+	module = "Mod",
+}
+
+-- Register the win condition (Some functions can be prepended with "Mod_" to be called automatically as part of the scripting framework)
+Core_RegisterModule(_mod.module)
+
+-----------------------------------------------------------------------
+-- Scripting framework 
+-----------------------------------------------------------------------
+
+-- Called after initialization is done when game is fading up from black
+function Mod_Start()
+	Add_Rules()
+end
+
+function Custom_Modify_WeaponDamage(groupid, hardpoint, factor, usage)
+	-- create the appropriate modifier
+	local modifier = Modifier_Create(MAT_Weapon, "damage_weapon_modifier", usage, false, factor, hardpoint)
+	local result = {}
+	
+	local _ApplyModifierToSquad = function(gid, idx, sid)
+		if Squad_IsAlive(sid) and Squad_Count(sid) > 0 and Squad_HasWeaponHardpoint(sid, hardpoint) then
+			local modids = Modifier_ApplyToSquad(modifier, sid, 0)
+			table.insert(result, modids)
+			Modifier_AddToSquadTable(sid, modids)
+		end
+	end
+	
+	local _ApplyModifierToEntity = function(gid, idx, eid)
+		if Entity_IsAlive(eid) then
+			local modids = Modifier_ApplyToEntity(modifier, eid, 0)
+			table.insert(result, modids)
+			Modifier_AddToEntityTable(eid, modids)
+		end
+	end
+	
+	if (scartype(groupid) == ST_SGROUP) then
+		-- apply this to each squad in the group
+		SGroup_ForEachEx(groupid, _ApplyModifierToSquad, true, true)
+	elseif (scartype(groupid) == ST_EGROUP) then
+		-- apply this to each entity in the group
+		EGroup_ForEachEx(groupid, _ApplyModifierToEntity, true, true)
+	end
+	
+	return result
+	
+end
+
+function On_Death(event)
+	if event.killer == nil then
+		-- think this only happens for gaia units such as sheep but something to check later probably
+		return
+	end
+	
+	local killer_entity_id = event.killer.EntityID -- can be a squad?
+	local killer_entity = Entity_FromID(killer_entity_id)
+	
+	local group_id = EGroup_CreateIfNotFound(killer_entity_id)
+	-- will fail if the entity is a squad which happens when a non-building is the killer
+	local ok, ret = pcall(EGroup_Single, group_id, killer_entity) 
+	
+	if not ok then
+		local squad = Entity_GetSquad(killer_entity)
+		local squad_count = Squad_Count(squad)
+		killer_entity = Squad_EntityAt(squad, 0)
+		group_id = SGroup_CreateIfNotFound(killer_entity_id)
+		SGroup_Single(group_id, squad)
+	end
+	
+	local modify_health_res = Modify_EntityMaxHealth(group_id, 1, MUT_Addition)
+	modify_health_res = Modify_EntityMaxHealth(group_id, 1.01, MUT_Multiplication)
+	
+	local num_hardpoints = Entity_GetWeaponHardpointCount(killer_entity)
+	
+	local modify_damage_res
+	for hardpoint_index=1,num_hardpoints do
+		local hardpoint_number = tostring(hardpoint_index)
+		if string.len(hardpoint_number) == 1 then
+			hardpoint_number = "0" .. hardpoint_number
+		end
+		
+		local hardpoint = "hardpoint_" .. hardpoint_number
+		
+		modify_damage_res = Custom_Modify_WeaponDamage(group_id, hardpoint, 1, MUT_Addition)
+		modify_damage_res = Custom_Modify_WeaponDamage(group_id, hardpoint, 1.01, MUT_Multiplication)
+	end
+	Rule_RemoveMe()
+end
+
+function On_Spawn(event)
+	local num_units_in_squad = Squad_Count(event.spawnedSquad)
+	
+	for index=0,num_units_in_squad - 1 do
+		local entity = Squad_EntityAt(event.spawnedSquad, index)
+		Rule_AddEntityEvent(On_Death, entity, GE_EntityKilled)
+	end
+end
+
+
+function Add_Rules()
+	for i, player in pairs(PLAYERS) do
+		local player_entgroupobs = Player_GetAllEntities(player.id)
+		
+		Rule_AddPlayerEvent(On_Spawn, player.id, GE_BuildItemComplete)
+		
+		for i=1,EGroup_Count(player_entgroupobs),1 do
+			local entity = EGroup_GetEntityAt(player_entgroupobs, i)
+			Rule_AddEntityEvent(On_Death, entity, GE_EntityKilled)
+		end
+	end
+end
+

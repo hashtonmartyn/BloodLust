@@ -11,7 +11,6 @@ import("modifiers.scar")
 -- Global data table that can be referenced in script functions (e.g. _mod.module = "Mod")
 _mod = {
 	module = "Mod",
-	options = {},
 	health = {
 		fixed = 1,
 		percentage = 1.01
@@ -29,41 +28,38 @@ Core_RegisterModule(_mod.module)
 -- Scripting framework 
 -----------------------------------------------------------------------
 
-function Mod_OnGameSetup()
-	Setup_GetWinConditionOptions(_mod.options)
-end
 
 function Mod_OnInit()
 	local health_fixed_bonus_options = {
-		[_mod.options.health_bonuses.fixed.enum_items.one] = 1,
-		[_mod.options.health_bonuses.fixed.enum_items.two] = 2,
-		[_mod.options.health_bonuses.fixed.enum_items.five] = 5,
-		[_mod.options.health_bonuses.fixed.enum_items.ten] = 10,
-		[_mod.options.health_bonuses.fixed.enum_items.twenty] = 20
+		[_mod.options.health_bonuses.fixed.one] = 1,
+		[_mod.options.health_bonuses.fixed.two] = 2,
+		[_mod.options.health_bonuses.fixed.five] = 5,
+		[_mod.options.health_bonuses.fixed.ten] = 10,
+		[_mod.options.health_bonuses.fixed.twenty] = 20
 	}
 	
 	local health_percentage_bonus_options = {
-		[_mod.options.health_bonuses.percentage.enum_items.one] = 1.01,
-		[_mod.options.health_bonuses.percentage.enum_items.two] = 1.02,
-		[_mod.options.health_bonuses.percentage.enum_items.five] = 1.05,
-		[_mod.options.health_bonuses.percentage.enum_items.ten] = 1.1,
-		[_mod.options.health_bonuses.percentage.enum_items.twenty] = 1.2
+		[_mod.options.health_bonuses.percentage.one] = 1.01,
+		[_mod.options.health_bonuses.percentage.two] = 1.02,
+		[_mod.options.health_bonuses.percentage.five] = 1.05,
+		[_mod.options.health_bonuses.percentage.ten] = 1.1,
+		[_mod.options.health_bonuses.percentage.twenty] = 1.2
 	}
 	
 	local damage_fixed_bonus_options = {
-		[_mod.options.damage_bonuses.fixed.enum_items.one] = 1,
-		[_mod.options.damage_bonuses.fixed.enum_items.two] = 2,
-		[_mod.options.damage_bonuses.fixed.enum_items.five] = 5,
-		[_mod.options.damage_bonuses.fixed.enum_items.ten] = 10,
-		[_mod.options.damage_bonuses.fixed.enum_items.twenty] = 20
+		[_mod.options.damage_bonuses.fixed.one] = 1,
+		[_mod.options.damage_bonuses.fixed.two] = 2,
+		[_mod.options.damage_bonuses.fixed.five] = 5,
+		[_mod.options.damage_bonuses.fixed.ten] = 10,
+		[_mod.options.damage_bonuses.fixed.twenty] = 20
 	}
 	
 	local damage_percentage_bonus_options = {
-		[_mod.options.damage_bonuses.percentage.enum_items.one] = 1.01,
-		[_mod.options.damage_bonuses.percentage.enum_items.two] = 1.02,
-		[_mod.options.damage_bonuses.percentage.enum_items.five] = 1.05,
-		[_mod.options.damage_bonuses.percentage.enum_items.ten] = 1.1,
-		[_mod.options.damage_bonuses.percentage.enum_items.twenty] = 1.2
+		[_mod.options.damage_bonuses.percentage.one] = 1.01,
+		[_mod.options.damage_bonuses.percentage.two] = 1.02,
+		[_mod.options.damage_bonuses.percentage.five] = 1.05,
+		[_mod.options.damage_bonuses.percentage.ten] = 1.1,
+		[_mod.options.damage_bonuses.percentage.twenty] = 1.2
 	}
 	
 	_mod.health.fixed = health_fixed_bonus_options[_mod.options.health_bonuses.fixed.enum_value]

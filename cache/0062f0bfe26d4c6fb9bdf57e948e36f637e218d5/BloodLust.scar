@@ -11,7 +11,6 @@ import("modifiers.scar")
 -- Global data table that can be referenced in script functions (e.g. _mod.module = "Mod")
 _mod = {
 	module = "Mod",
-	options = {},
 	health = {
 		fixed = 1,
 		percentage = 1.01
@@ -28,10 +27,6 @@ Core_RegisterModule(_mod.module)
 -----------------------------------------------------------------------
 -- Scripting framework 
 -----------------------------------------------------------------------
-
-function Mod_OnGameSetup()
-	Setup_GetWinConditionOptions(_mod.options)
-end
 
 function Mod_OnInit()
 	local health_fixed_bonus_options = {

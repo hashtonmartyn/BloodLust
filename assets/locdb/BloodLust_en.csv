@@ -1,4 +1,83 @@
 ﻿ID,Pipeline,PipelineStage,Notes,TranslationNotes,Tags,Text
 1,,,Mod name.,,,BloodLust
-2,,,Mod description.,,,Units and buildings gain bonus health and damage when they kill enemy units
+2,,,Mod description.,,,Units and buildings gain bonus health and damage when they kill enemy units. Check https://github.com/hashtonmartyn/BloodLust/ for the code
 3,,,,,,BloodLust
+4,,,,,,Health Bonuses
+5,,,,,,Fixed
+6,,,,,,The base HP added for every kill
+7,,,,,,The base HP added for every kill
+8,,,,,,1
+9,,,,,,1 HP
+10,,,,,,2
+11,,,,,,2 HP
+12,,,,,,5
+13,,,,,,5 HP
+14,,,,,,10
+15,,,,,,10 HP
+16,,,,,,20
+17,,,,,,20 HP
+18,,,,,,Percentage
+19,,,,,,The percent HP increase for every kill
+20,,,,,,The percent HP increase for every kill
+21,,,,,,1%
+22,,,,,,1% of the killer's HP
+23,,,,,,2%
+24,,,,,,2% of the killer's HP
+25,,,,,,5%
+26,,,,,,5% of the killer's HP
+27,,,,,,10%
+28,,,,,,10% of the killer's HP
+29,,,,,,20%
+30,,,,,,20% of the killer's HP
+31,,,,,,Damage Bonuses
+32,,,,,,Fixed
+33,,,,,,The base damage added for every kill
+34,,,,,,The base damage added for every kill
+35,,,,,,1
+36,,,,,,1 damage
+37,,,,,,The percent damage increase for every kill
+38,,,,,,2 damage
+39,,,,,,5
+40,,,,,,5 damage
+41,,,,,,10
+42,,,,,,10 damage
+43,,,,,,20
+44,,,,,,20 damage
+45,,,,,,1% 
+46,,,,,,1% of the killer's damage
+47,,,,,,2%
+48,,,,,,2% of the killer's damage
+49,,,,,,5%
+50,,,,,,5% of the killer's damage
+51,,,,,,10%
+52,,,,,,10% of the killer's damage
+53,,,,,,20%
+54,,,,,,20% of the killer's damage
+55,,,,,,Damage Bonuses
+56,,,,,,Fixed
+57,,,,,,The base damage added for every kill
+58,,,,,,The base damage added for every kill
+59,,,,,,1
+60,,,,,,1 damage
+61,,,,,,2
+62,,,,,,2 damage
+63,,,,,,5
+64,,,,,,5 damage
+65,,,,,,10
+66,,,,,,10 damage
+67,,,,,,20
+68,,,,,,20 damage
+69,,,,,,Percentage
+70,,,,,,The percentage damage increase for every kill
+71,,,,,,The percentage damage increase for every kill
+72,,,,,,1%
+73,,,,,,1% of damage
+74,,,,,,2%
+75,,,,,,2% of damage
+76,,,,,,5%
+77,,,,,,5% of damage
+78,,,,,,10%
+79,,,,,,10% of damage
+80,,,,,,20%
+81,,,,,,20% of damage
+82,,,,,,Units and buildings gain bonus health and damage when they kill enemy units

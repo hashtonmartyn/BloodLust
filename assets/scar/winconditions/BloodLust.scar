@@ -128,7 +128,8 @@ function On_Death(event)
 	if not ok then
 		local squad = Entity_GetSquad(killer_entity)
 		local squad_count = Squad_Count(squad)
-		killer_entity = Squad_EntityAt(squad, 0)
+		
+		killer_entity = Squad_GetFirstEntity(squad)
 		group_id = SGroup_CreateIfNotFound(killer_entity_id)
 		SGroup_Single(group_id, squad)
 	end
@@ -154,12 +155,9 @@ function On_Death(event)
 end
 
 function On_Spawn(event)
-	local num_units_in_squad = Squad_Count(event.spawnedSquad)
-	
-	for index=0,num_units_in_squad - 1 do
-		local entity = Squad_EntityAt(event.spawnedSquad, index)
-		Rule_AddEntityEvent(On_Death, entity, GE_EntityKilled)
-	end
+	-- TODO: Check if this works for double produced mongol units and malian farimba units
+	local entity = Squad_GetFirstEntity(event.spawnedSquad)
+	Rule_AddEntityEvent(On_Death, entity, GE_EntityKilled)
 end
 
 
